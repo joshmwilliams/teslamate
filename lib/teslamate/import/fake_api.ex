@@ -54,7 +54,7 @@ defmodule TeslaMate.Import.FakeApi do
         {:noreply, state}
 
       {{:ok, %Vehicle{drive_state: %Drive{timestamp: ts}}}, state}
-      when ts >= date_limit ->
+      when ts =< date_limit ->
         send(state.pid, {:done, state.current_chunk})
         send(state.pid, :done)
         {:noreply, state}
